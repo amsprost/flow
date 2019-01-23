@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<schema>
+  <!-- the event stream -->
+  <table name="events">
+    <column name="id" type="integer" autoincrement="true" unsigned="true"/>
+    <column name="data"  type="text" notnull="false" />
+
+    <index name="primary" primary="true" columns="id"/>
+  </table>
+
+  <table name="events_with_type">
+    <column name="id" type="integer" autoincrement="true" unsigned="true"/>
+    <column name="data"  type="text" notnull="false" />
+    <column name="event_type" type="string" length="64" notnull="false" />
+
+    <index name="primary" primary="true" columns="id"/>
+    <index name="event_type" columns="event_type"/>
+  </table>
+
+  <table name="states">
+    <column name="id" type="string" length="64" />
+    <column name="data"  type="text" notnull="false" />
+
+    <index name="primary" primary="true" columns="id"/>
+  </table>
+
+</schema>
