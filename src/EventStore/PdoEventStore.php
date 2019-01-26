@@ -64,7 +64,7 @@ class PdoEventStore implements EventStoreInterface
 
     public function getEventsWhere(array $conditions)
     {
-        $events = $this->getAllEvents();
+        $events = $this->getEvents();
         $res = [];
         foreach ($events as $event) {
             $match = true;
