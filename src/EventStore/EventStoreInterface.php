@@ -8,7 +8,9 @@ interface EventStoreInterface
     /**
      * Return array of all events
      */
-    public function getAllEvents();
+    public function getEvents();
+
+    public function getEventsWhere(array $conditions);
 
     public function clear();
 }

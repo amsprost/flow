@@ -8,13 +8,15 @@
     <index name="primary" primary="true" columns="id"/>
   </table>
 
-  <table name="events_with_type">
+  <table name="events_with_type_and_user">
     <column name="id" type="integer" autoincrement="true" unsigned="true"/>
-    <column name="data"  type="text" notnull="false" />
+    <column name="data" type="text" notnull="false" />
     <column name="event_type" type="string" length="64" notnull="false" />
+    <column name="user" type="string" length="64" notnull="false" />
 
     <index name="primary" primary="true" columns="id"/>
     <index name="event_type" columns="event_type"/>
+    <index name="user" columns="user"/>
   </table>
 
   <table name="states">

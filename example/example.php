@@ -40,7 +40,8 @@ if (!$dsn) {
     $pdo = $connector->getPdo($config);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $eventStore = new \Flow\EventStore\PdoEventStore($pdo);
+    //$eventStore = new \Flow\EventStore\PdoEventStore($pdo, 'events');
+    $eventStore = new \Flow\EventStore\PdoIndexedEventStore($pdo, 'events_with_type_and_user', ['type' => 'event_type', 'user'=>'user']);
     $stateStore = new \Flow\StateStore\PdoStateStore($pdo);
 }
 
@@ -64,7 +65,8 @@ $projector = new \Flow\Projector\MultiProjector([$userProjector, $orderProjector
 
 
 // Get all events from the event store
-$events = $eventStore->getAllEvents();
+//$events = $eventStore->getEvents();
+$events = $eventStore->getEventsWhere(['user'=>'joe']);
 
 // Project all events
 foreach ($events as $event) {

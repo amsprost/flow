@@ -45,7 +45,7 @@ class PdoEventStore implements EventStoreInterface
         $res = $statement->execute($arguments);
     }
 
-    public function getAllEvents()
+    public function getEvents()
     {
         $sql = sprintf(
             'SELECT data FROM %s',
@@ -60,5 +60,23 @@ class PdoEventStore implements EventStoreInterface
             $events[] = $event;
         }
         return $events;
+    }
+
+    public function getEventsWhere(array $conditions)
+    {
+        $events = $this->getAllEvents();
+        $res = [];
+        foreach ($events as $event) {
+            $match = true;
+            foreach ($conditions as $key=>$value) {
+                if ($event[$key] != $value) {
+                    $match = false;
+                }
+            }
+            if ($match) {
+                $res[] = $event;
+            }
+        }
+        return $res;
     }
 }
