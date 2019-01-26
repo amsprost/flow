@@ -69,7 +69,7 @@ class PdoEventStore implements EventStoreInterface
         foreach ($events as $event) {
             $match = true;
             foreach ($conditions as $key=>$value) {
-                if ($event[$key] != $value) {
+                if (($event[$key] ?? null) != $value) {
                     $match = false;
                 }
             }
