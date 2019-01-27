@@ -11,9 +11,27 @@ class ArrayEventStore implements EventStoreInterface
         $this->events[] = $event;
     }
 
-    public function getAllEvents()
+    public function getEvents()
     {
         return $this->events;
+    }
+
+    public function getEventsWhere(array $conditions)
+    {
+        $events = $this->getEvents();
+        $res = [];
+        foreach ($events as $event) {
+            $match = true;
+            foreach ($conditions as $key=>$value) {
+                if (($event[$key] ?? null) != $value) {
+                    $match = false;
+                }
+            }
+            if ($match) {
+                $res[] = $event;
+            }
+        }
+        return $res;
     }
 
     public function clear()

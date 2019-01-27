@@ -4,6 +4,8 @@ namespace Flow\Projector;
 
 class MultiProjector implements ProjectorInterface
 {
+    protected $projectors;
+
     public function __construct(array $projectors)
     {
         $this->projectors = $projectors;

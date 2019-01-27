@@ -7,7 +7,7 @@ use PDO;
 class PdoStateStore implements StateStoreInterface
 {
     protected $pdo;
-    protected $tablename;
+    protected $tableName;
 
     public function __construct(PDO $pdo, $tableName = 'states')
     {
